@@ -9,21 +9,25 @@ const StakingDapp = ({
   data,
   onClickCardBtn,
   unstakeMany,
-  approveAll
+  stakeMany,
+  approveAll,
 }) => {
   //   const [cards, setCards] = useState([]);
   const [unstakeArr, setUnstakeArr] = useState([]);
+  const [stakeArr, setStakeArr] = useState([]);
 
   //   useEffect(() => {
   //     setCards(data);
   //   }, [data]);
 
   //   console.log("dataaaaaaaaaaaaaaaaaa=====>", data);
-
+console.log(stakeMany, "stakeMn\n\n")
+console.log(unstakeMany, "unstakeMn\n\n")
+console.log(approveAll, "approveArr\n\n")
   return (
     <div className="container">
       <div className="header--wrap">
-        <Header unstakeArr={unstakeArr} unstakeMany={unstakeMany} approveAll={approveAll}/>
+        <Header unstakeArr={unstakeArr} unstakeMany={unstakeMany} stakeArr={stakeArr} stakeMany={stakeMany} approveAll={approveAll}/>
       </div>
       <div className="grid-container">
         {data?.length > 0 ? (
@@ -43,6 +47,8 @@ const StakingDapp = ({
                   onClickCardBtn={onClickCardBtn}
                   setUnstakeArr={setUnstakeArr}
                   unstakeArr={unstakeArr}
+                  stakeArr={stakeArr}
+                  setStakeArr={setStakeArr}
                 />
               </div>
             );

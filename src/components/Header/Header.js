@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 // import { Routes } from "../../App";
 import "./Header.css";
 
-const Header = ({ unstakeMany, unstakeArr, approveAll }) => {
+const Header = ({ unstakeMany, unstakeArr, stakeArr, stakeMany, approveAll }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentRouteName = location.pathname.slice(1); // stake / unstake
@@ -25,6 +25,14 @@ const Header = ({ unstakeMany, unstakeArr, approveAll }) => {
     console.log("unstakeArr\n", unstakeArr);
     if (unstakeArr.length > 0) {
       unstakeMany(unstakeArr);
+    }
+  };
+
+  const onclickStakeMany = () => {
+    console.log("stakeArr\n", stakeArr);
+    console.log(stakeMany, "stakemN")
+    if (stakeArr.length > 0) {
+      stakeMany(stakeArr);
     }
   };
 
@@ -51,6 +59,11 @@ const Header = ({ unstakeMany, unstakeArr, approveAll }) => {
         {currentRouteName === "unstake" && (
           <button className="claim-btn btn" onClick={onclickUnstakeMany}>
             {`UNSTAKE SELECTED (${unstakeArr.length})`}
+          </button>
+        )}
+        { currentRouteName === "stake" && (
+          <button className="claim-btn btn" onClick={onclickStakeMany}>
+            {`STAKE SELECTED (${stakeArr.length})`}
           </button>
         )}
         <button className="claim-btn btn" onClick={onClcikClaimButton}>

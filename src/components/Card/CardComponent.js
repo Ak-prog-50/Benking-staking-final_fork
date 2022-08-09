@@ -13,23 +13,30 @@ const CardComponent = ({
   setUnstakeArr,
   unstakeArr,
   animation,
+  stakeArr,
+  setStakeArr
   // image,
 }) => {
   const location = useLocation();
   const currentRouteName = location.pathname.slice(1); // stake / unstake
 
   const [isInUnstakeArr, setisInUnstakeArr] = useState(false);
+  const [isInStakeArr, setisInStakeArr] = useState(false);
 
   useEffect(() => {
     setisInUnstakeArr(unstakeArr.includes(id));
   }, [unstakeArr, id]);
+
+  useEffect(() => {
+    setisInStakeArr(stakeArr.includes(id));
+  }, [stakeArr, id]);
 
   const onClickCard = () => {
     setSelectedId(id);
     console.log("selected card id", id);
   };
 
-  const onClickPlus = () => {
+  const onClickPlusUnstake = () => {
     console.log("before set", unstakeArr, selectedId);
 
     if (!isInUnstakeArr) {
@@ -38,6 +45,17 @@ const CardComponent = ({
       const newUnstakeArr = unstakeArr.filter((arrId) => arrId !== id);
       setUnstakeArr(newUnstakeArr);
     }
+  };
+
+  const onClickPlusStake = () => {
+    console.log("before set", stakeArr, selectedId);
+
+    if (!isInStakeArr) {
+      setStakeArr([...stakeArr, selectedId]);
+    } else {
+      const newStakeArr = stakeArr.filter((arrId) => arrId !== id);
+      setStakeArr(newStakeArr);
+    }    
   };
 
   return (
@@ -62,15 +80,15 @@ const CardComponent = ({
                   <button onClick={onClickCardBtn} className="card-btn btn">
                     {currentRouteName}
                   </button>
-                  {currentRouteName === "unstake" ? (
+                  {currentRouteName === "unstake" || "stake" ? (
                     <button
-                      onClick={onClickPlus}
+                      onClick={currentRouteName === "unstake" ? onClickPlusUnstake : onClickPlusStake}
                       className="plus-btn"
                       style={{
-                        background: `${isInUnstakeArr ? "green" : "#8dcd49"}`,
+                        background: `${isInStakeArr ? "green" : "#8dcd49"}`,
                       }}
                     >
-                      {isInUnstakeArr ? (
+                      {isInStakeArr ? (
                         <div style={{ fontSize: "0.99em", fontWeight: "300" }}>
                           &#10003;
                         </div>

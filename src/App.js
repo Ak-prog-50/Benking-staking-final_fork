@@ -144,6 +144,10 @@ function App() {
     stakingContract.methods.unstake(unstakeArr).send({ from: account });
   }
 
+  async function stakeMany(stakeArr) {
+    stakingContract.methods.stake(stakeArr).send({ from: account });
+  }
+
   async function earningInfo() {
     const ids = await stakingContract.methods.tokensOfOwner(account).call();
 
@@ -256,6 +260,7 @@ function App() {
               stakes={stakes} // stake data array ( cards )
               account={account}
               approveAll={setApprove}
+              stakeMany={stakeMany}
             />
           }
         />
